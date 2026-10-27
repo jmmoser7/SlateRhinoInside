@@ -101,6 +101,12 @@
     "logs and agent state"
   ],
   "required_user_installation": "Windows x64, .NET Framework 4.8, independently installed licensed Rhino 8",
-  "runtime_acceptance": "296 pure checks pass. Native Grasshopper NoDoc display/delete/reopen observed; repeat focus/parking issue and matching final Slate runtime acceptance pending. Camera recall remains qualified by recorded pairing.",
+  "runtime_acceptance": "296 pure checks pass. Matching Slate 6ee75/v10f passed a bounded NoDoc GUI test: five park/focus cycles, child/leader deletion and footer reopening, without settled black/floating residue. No definition/solver/graph/same-HWND retention or general stability claim. Camera recall remains qualified by recorded pairing.",
+  "runtime_acceptance_receipt": {
+    "name": "ci-6ee75-gh-live-acceptance.json",
+    "sha256": "0b75c384490c3083041b3a1bb6505dd30cfa19abe2a106b88c29e1f80384cc69",
+    "slate_exe_sha256": "ab183d307fe3ddbc872cf473a84503dcca58ef84e75f38d09acf987f5f405dbc",
+    "unchanged_model_sha256": "ce2547dc013f7b4891093b5c65ea9d4cc6ef0c4751472fd7a2f985fbd54f15f5"
+  },
   "source_license": "No new license grant; owner final release gate pending"
 }
