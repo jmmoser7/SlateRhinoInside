@@ -12,8 +12,8 @@ does not certify pending Grasshopper or camera-recall runtime acceptance.
 .\Register-SlateRhino.ps1 -SourceRoot 'C:\Models' -PrintOnly
 Validate the extracted package/default build without changing registration.
 .EXAMPLE
-.\Register-SlateRhino.ps1 -Helper '.\bin\Release\production-0.2.0-private-ui-v10e\SlateRhinoInside.exe' -SourceRoot 'C:\Models'
-Select the versioned v10e candidate from this source checkout.
+.\Register-SlateRhino.ps1 -Helper '.\bin\Release\production-0.2.0-private-ui-v10f\SlateRhinoInside.exe' -SourceRoot 'C:\Models'
+Select the versioned v10f candidate from this source checkout.
 #>
 param(
     [Parameter(Mandatory = $true)][string[]]$SourceRoot,

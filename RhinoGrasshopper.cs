@@ -17,11 +17,15 @@ internal sealed partial class RhinoAdapter
     {
         // Only this documented plugin interface is used. No script text,
         // Grasshopper definition, arbitrary type or assembly path is accepted.
-        grasshopperInterface = RhinoApp.GetPlugInObject("Grasshopper")
-            ?? throw new ProtocolFailure("unsupported_operation", "Grasshopper is not installed in this Rhino runtime");
-        CallGrasshopper("LoadEditor");
-        var form = CurrentGrasshopperForm()
-            ?? throw new ProtocolFailure("invalid_result", "Grasshopper did not create its native editor");
+        var form = CurrentGrasshopperForm();
+        if (form == null || !form.IsHandleCreated)
+        {
+            grasshopperInterface = RhinoApp.GetPlugInObject("Grasshopper")
+                ?? throw new ProtocolFailure("unsupported_operation", "Grasshopper is not installed in this Rhino runtime");
+            CallGrasshopper("LoadEditor");
+            form = CurrentGrasshopperForm()
+                ?? throw new ProtocolFailure("invalid_result", "Grasshopper did not create its native editor");
+        }
         IntPtr handle = form.Handle;
         uint thread = Native.GetWindowThreadProcessId(handle, out uint pid);
         if (!Native.IsWindow(handle) || pid != Native.GetCurrentProcessId() || thread != Native.GetCurrentThreadId())
@@ -35,15 +39,7 @@ internal sealed partial class RhinoAdapter
         var hosting = ReadSurfaceHost(handle, grasshopperRecovery?.Parent ?? IntPtr.Zero, grasshopperRecovery?.Owner ?? IntPtr.Zero);
         // Initial loading only offers the HWND. The host attaches and places it,
         // then repeats this closed operation to reveal the authenticated surface.
-        if (hosting.OwnerMatches && hosting.OwnUiThread && hosting.Enabled && hosting.ClipHasArea && hosting.ForegroundEligible)
-        {
-            CallGrasshopper("ShowEditor");
-            var shown = ReadSurfaceHost(handle, grasshopperRecovery?.Parent ?? IntPtr.Zero, grasshopperRecovery?.Owner ?? IntPtr.Zero);
-            if (!shown.OwnerMatches || !shown.ClipHasArea || !shown.ForegroundEligible) CallGrasshopper("HideEditor");
-            else if (NativeSurfaceAuthority.Allows(shown.OwnerMatches, shown.OwnUiThread, shown.Visible, shown.Enabled, shown.ClipHasArea, shown.ForegroundEligible, true))
-                Native.SetForegroundWindow(handle);
-        }
-        else CallGrasshopper("HideEditor"); // LoadEditor does not promise a hidden initial editor.
+        ShowHostedGrasshopper(form, handle);
         return new JObject { ["surface_id"] = "grasshopper", ["surface"] = GrasshopperSurface(),
             ["visible"] = Native.IsWindowVisible(handle), ["hosted"] = hosting.OwnerMatches };
     }
@@ -57,7 +53,7 @@ internal sealed partial class RhinoAdapter
     private JObject HideGrasshopper()
     {
         if (GrasshopperSurface() == null) return new JObject { ["surface_id"] = "grasshopper", ["visible"] = false, ["loaded"] = false };
-        CallGrasshopper("HideEditor");
+        grasshopperForm!.Hide(); // Tuck the editor without closing its native document or replacing its HWND.
         return new JObject { ["surface_id"] = "grasshopper", ["visible"] = Native.IsWindowVisible(grasshopperWindow), ["loaded"] = true };
     }
     private JObject? GrasshopperSurface()
@@ -88,14 +84,26 @@ internal sealed partial class RhinoAdapter
             case "attach":
                 if (grasshopperAttached || !JToken.DeepEquals(surface, action["surface"])) throw new ProtocolFailure("invalid_request", "Invalid Grasshopper surface attachment");
                 grasshopperAttached = true; break;
-            case "show": RequireHostedSurface(grasshopperWindow, grasshopperRecovery?.Parent ?? IntPtr.Zero, grasshopperRecovery?.Owner ?? IntPtr.Zero, false); CallGrasshopper("ShowEditor"); break;
-            case "hide": CallGrasshopper("HideEditor"); break;
+            case "show":
+                if (!ShowHostedGrasshopper(grasshopperForm!, grasshopperWindow))
+                    throw new ProtocolFailure("invalid_request", "Grasshopper surface is parked or is not owned by its authenticated Slate host");
+                break;
+            case "hide": grasshopperForm!.Hide(); break;
             case "focus": RequireHostedSurface(grasshopperWindow, grasshopperRecovery?.Parent ?? IntPtr.Zero, grasshopperRecovery?.Owner ?? IntPtr.Zero, true); Native.SetForegroundWindow(grasshopperWindow); break;
             case "blur": Native.SetFocus(IntPtr.Zero); break;
             case "place": break; // The host NativeSurface remains the only placement owner.
             default: throw new ProtocolFailure("invalid_request", "Unknown Grasshopper surface action");
         }
     }
+    private bool ShowHostedGrasshopper(Form form, IntPtr handle) => GrasshopperPresentation.TryShow(
+        () => ReferenceEquals(CurrentGrasshopperForm(), form) && !form.IsDisposed && form.IsHandleCreated && form.Handle == handle
+            ? ReadSurfaceHost(handle, grasshopperRecovery?.Parent ?? IntPtr.Zero, grasshopperRecovery?.Owner ?? IntPtr.Zero)
+            : default,
+        // Installed ShowEditor calls Form.Show(MainRhinoWindow()), replacing Slate's
+        // owner. Parameterless Show preserves the existing, already-created HWND.
+        () => form.Show(),
+        () => { if (!form.IsDisposed) form.Hide(); },
+        () => Native.SetForegroundWindow(handle));
     private void RestoreGrasshopper()
     {
         try
@@ -105,5 +113,24 @@ internal sealed partial class RhinoAdapter
             grasshopperAttached = false;
         }
         catch { } // A closed editor is never recreated by detach cleanup.
+    }
+}
+
+internal static class GrasshopperPresentation
+{
+    internal static bool TryShow(Func<NativeSurfaceHostState> read, Action show, Action hide, Action focus)
+    {
+        var before = read();
+        if (!NativeSurfaceAuthority.Allows(before.OwnerMatches, before.OwnUiThread, before.Visible,
+            before.Enabled, before.ClipHasArea, before.ForegroundEligible, false))
+        { hide(); return false; }
+        try
+        {
+            show();
+            if (!NativeSurfaceAuthority.CanRaise(read())) { hide(); return false; }
+            focus();
+            return true;
+        }
+        catch { hide(); throw; }
     }
 }

@@ -31,7 +31,7 @@ dotnet run --project SlateRhinoInside.csproj -c Release -- --self-test
 
 Override `-p:RhinoSystemDirectory=...` when building for another installation. RhinoCommon and the Rhino/Grasshopper installation are not redistribution payloads.
 
-The v10e candidate's helper SHA256 is `1BC58650F53583C9E8BD084F92D157F12AA96B9EBBF131EB73D8EA63643084E0`; its Release build and 271 pure checks pass. The runtime package includes its executable, configuration, Rhino.Inside loader, Newtonsoft.Json, registration script, installation guide, checksums and upstream notices.
+The v10f candidate's helper SHA256 is `990A3154CE97F2C92C8D7C2E6CB5670BBA73D11A900233E6E235727A28BF89C9`; its Release build and 296 pure checks pass. The runtime package includes its executable, configuration, Rhino.Inside loader, Newtonsoft.Json, registration script, installation guide, checksums and upstream notices.
 
 ## Workflow and validation scope
 
@@ -39,9 +39,11 @@ The fixed native command surface covers layer hierarchy/settings, CSV layers, na
 
 Fresh-session original-PNG board dragging has visibly restored the camera with matching source identity, target, display mode and units. Exact pose/lens and pixel equality across changed viewport dimensions remain unverified. Preserve the original PNG file and its metadata.
 
-Native toolbar images and command-prompt size follow portal enlargement and return after settling. Menu, panel, dialog and Grasshopper fonts retain their own native sizing. Physical right-mouse navigation parity and Grasshopper companion attach/tuck/reopen remain separate runtime checks. Third-party Grasshopper components may display their own load errors.
+Native toolbar images and command-prompt size follow portal enlargement and return after settling. Menu, panel, dialog and Grasshopper fonts retain their own native sizing. Physical right-mouse navigation parity remains a separate runtime check. The helper now preserves Slate ownership when showing an existing Grasshopper editor and uses managed Hide rather than the plugin Close path. Live canvas display, child deletion and reopening were observed in a dedicated NoDoc test. A subsequent focus/parking issue remains under investigation; definition retention and general stability are not certified. Third-party Grasshopper components may display their own load errors.
 
 Native protocol receipts have a finite session budget. Unresolved Grasshopper discovery is cached per worker rather than continuously polling. Indeterminate commands are retained; they are not automatically replayed. Parent-exit recovery queues document-preserving native UI restoration independently of a pending connector call; a blocked third-party UI thread can still delay restoration.
+
+A bounded local session on the installed NVIDIA GTX 1660 Ti completed without a native fault. Earlier access violations in the Intel OpenGL module remain under investigation. Choosing a per-application GPU is a local comparison, not a proven crash fix.
 
 ## Source and dependencies
 
