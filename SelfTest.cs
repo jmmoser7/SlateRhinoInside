@@ -65,6 +65,7 @@ internal static partial class SelfTest
         CheckWorkflowData(Check);
         CheckLayoutData(Check);
         CheckHostedSurfacePolicy(Check);
+        CheckGrasshopperPresentation(Check);
         CheckColdCapturePolicy(Check);
         CheckUiScalePolicy(Check);
         CheckQueuedRecovery(Check);

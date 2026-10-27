@@ -31,7 +31,7 @@ dotnet run --project SlateRhinoInside.csproj -c Release -- --self-test
 
 Override `-p:RhinoSystemDirectory=...` when building for another installation. RhinoCommon and the Rhino/Grasshopper installation are not redistribution payloads.
 
-The v10e candidate's helper SHA256 is `1BC58650F53583C9E8BD084F92D157F12AA96B9EBBF131EB73D8EA63643084E0`; its Release build and 271 pure checks pass. The runtime package includes its executable, configuration, Rhino.Inside loader, Newtonsoft.Json, registration script, installation guide, checksums and upstream notices.
+The v10f candidate's helper SHA256 is `990A3154CE97F2C92C8D7C2E6CB5670BBA73D11A900233E6E235727A28BF89C9`; its Release build and 296 pure checks pass. The runtime package includes its executable, configuration, Rhino.Inside loader, Newtonsoft.Json, registration script, installation guide, checksums and upstream notices.
 
 ## Workflow and validation scope
 
@@ -39,9 +39,15 @@ The fixed native command surface covers layer hierarchy/settings, CSV layers, na
 
 Fresh-session original-PNG board dragging has visibly restored the camera with matching source identity, target, display mode and units. Exact pose/lens and pixel equality across changed viewport dimensions remain unverified. Preserve the original PNG file and its metadata.
 
-Native toolbar images and command-prompt size follow portal enlargement and return after settling. Menu, panel, dialog and Grasshopper fonts retain their own native sizing. Physical right-mouse navigation parity and Grasshopper companion attach/tuck/reopen remain separate runtime checks. Third-party Grasshopper components may display their own load errors.
+Native toolbar images and command-prompt size follow portal enlargement and return after settling. Menu, panel, dialog and Grasshopper fonts retain their own native sizing. Physical right-mouse navigation parity remains a separate runtime check. The helper preserves Slate ownership when showing an existing Grasshopper editor and uses managed Hide rather than the plugin Close path.
+
+The matching Slate CI source `6ee75` (executable SHA256 `AB183D307FE3DDBC872CF473A84503DCCA58EF84E75F38D09ACF987F5F405DBC`) and v10f helper passed a bounded NoDoc GUI lifecycle test on 2026-10-27: two blank-park/double-click-focus cycles, deletion of the child card and leader, footer reopening, then three more park/focus cycles. Each settled parked state was clean and each focus returned the real editor; no large black or floating native-window residue was observed in those cycles. The saved intermediate workbook contained only the parent, the helper stayed alive, and the final workbook contained the parent, reopened child and leader. This does not certify general stability or GH definition, solver, graph or same-HWND retention; no GH definition was intentionally opened or authored. Third-party components may display their own loading errors; the test dismissed one Cytoskeleton error dialog normally without changing plugin or security settings.
+
+The live receipt `ci-6ee75-gh-live-acceptance.json` has SHA256 `0B75C384490C3083041B3A1BB6505DD30CFA19ABE2A106B88C29E1F80384CC69`. Both the original 5,738-byte model and its isolated copy retained SHA256 `CE2547DC013F7B4891093B5C65EA9D4CC6EF0C4751472FD7A2F985FBD54F15F5`; this lifecycle test issued no model mutations.
 
 Native protocol receipts have a finite session budget. Unresolved Grasshopper discovery is cached per worker rather than continuously polling. Indeterminate commands are retained; they are not automatically replayed. Parent-exit recovery queues document-preserving native UI restoration independently of a pending connector call; a blocked third-party UI thread can still delay restoration.
+
+A bounded local session on the installed NVIDIA GTX 1660 Ti completed without a native fault. Earlier access violations in the Intel OpenGL module remain under investigation. Choosing a per-application GPU is a local comparison, not a proven crash fix.
 
 ## Source and dependencies
 

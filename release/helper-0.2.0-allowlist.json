@@ -1,26 +1,26 @@
 {
   "schema": "slate-rhino-helper-release-allowlist-v1",
   "version": "0.2.0",
-  "candidate": "private-ui-v10e",
+  "candidate": "private-ui-v10f",
   "status": "candidate_test_only_pending_root_release_gate",
   "runtime": [
     {
-      "source": "bin/Release/production-0.2.0-private-ui-v10e/SlateRhinoInside.exe",
+      "source": "bin/Release/production-0.2.0-private-ui-v10f/SlateRhinoInside.exe",
       "destination": "bin/Release/net48/SlateRhinoInside.exe",
-      "sha256": "1bc58650f53583c9e8bd084f92d157f12aa96b9ebbf131eb73d8ea63643084e0"
+      "sha256": "990a3154ce97f2c92c8d7c2e6cb5670bba73d11a900233e6e235727a28bf89c9"
     },
     {
-      "source": "bin/Release/production-0.2.0-private-ui-v10e/SlateRhinoInside.exe.config",
+      "source": "bin/Release/production-0.2.0-private-ui-v10f/SlateRhinoInside.exe.config",
       "destination": "bin/Release/net48/SlateRhinoInside.exe.config",
       "sha256": "051099983b896673909e01a1f631b6652abb88da95c9f06f3efef4be033091fa"
     },
     {
-      "source": "bin/Release/production-0.2.0-private-ui-v10e/Rhino.Inside.dll",
+      "source": "bin/Release/production-0.2.0-private-ui-v10f/Rhino.Inside.dll",
       "destination": "bin/Release/net48/Rhino.Inside.dll",
       "sha256": "a2ecf4f83d49865de9447e140f864217bf84e7310b55d370110f412252427f55"
     },
     {
-      "source": "bin/Release/production-0.2.0-private-ui-v10e/Newtonsoft.Json.dll",
+      "source": "bin/Release/production-0.2.0-private-ui-v10f/Newtonsoft.Json.dll",
       "destination": "bin/Release/net48/Newtonsoft.Json.dll",
       "sha256": "e1e27af7b07eeedf5ce71a9255f0422816a6fc5849a483c6714e1b472044fa9d"
     }
@@ -35,6 +35,7 @@
     "examples/masterplan/masterplan.css",
     "examples/masterplan/masterplan.js",
     "examples/masterplan/README.md",
+    "GrasshopperPresentationTests.cs",
     "KeyboardRelay.cs",
     "LayoutTests.cs",
     "licenses/Newtonsoft.Json-MIT.txt",
@@ -100,6 +101,12 @@
     "logs and agent state"
   ],
   "required_user_installation": "Windows x64, .NET Framework 4.8, independently installed licensed Rhino 8",
-  "runtime_acceptance": "Current pairing Grasshopper/camera verification remains pending; 271 pure tests do not certify GUI behavior",
+  "runtime_acceptance": "296 pure checks pass. Matching Slate 6ee75/v10f passed a bounded NoDoc GUI test: five park/focus cycles, child/leader deletion and footer reopening, without settled black/floating residue. No definition/solver/graph/same-HWND retention or general stability claim. Camera recall remains qualified by recorded pairing.",
+  "runtime_acceptance_receipt": {
+    "name": "ci-6ee75-gh-live-acceptance.json",
+    "sha256": "0b75c384490c3083041b3a1bb6505dd30cfa19abe2a106b88c29e1f80384cc69",
+    "slate_exe_sha256": "ab183d307fe3ddbc872cf473a84503dcca58ef84e75f38d09acf987f5f405dbc",
+    "unchanged_model_sha256": "ce2547dc013f7b4891093b5c65ea9d4cc6ef0c4751472fd7a2f985fbd54f15f5"
+  },
   "source_license": "No new license grant; owner final release gate pending"
 }
