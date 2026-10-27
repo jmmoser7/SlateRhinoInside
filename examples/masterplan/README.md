@@ -1,0 +1,13 @@
+# Masterplan controls example
+
+A small, reusable Slate Web control surface for six native Rhino building masses. The bundle is self-contained and uses the shared `slate-control` bridge and declarative `application/slate-control+json` manifest. It requires a compatible Slate build, the independent Rhino.Inside connector, and locally installed licensed Rhino 8.
+
+1. Create and save a Slate workbook beside this bundle or in a parent folder, so the workbook can resolve the relative HTML, JavaScript and CSS files. Keep the five bundle files together.
+2. Add a real, writable `.3dm` model through Slate's normal 3D model portal, from a folder approved for the connector. Use the Rhino blister's **Open isolated Rhino copy** action to enter a private native document.
+3. In that private document, create the six typed building masses `B01` through `B06` using the connector's bounded `org.slate.rhino.draft_building_set` command. The example dimensions, initial floors, colors and 3.6 m floor height are in `masterplan-data.js`; each footprint is the rectangle defined by its x, y, width and depth. Arbitrary untyped meshes are not recognized as these buildings. The dashboard does not seed or clear the model.
+4. Add `index.html` as a local Web portal. Draw a normal control wire from the model portal to the Web portal's `model` input. Use Slate's existing connection and scoped mutation controls to enable the private document.
+5. The sliders start disabled. They activate for each building only after Slate confirms the connected native state. Hover or keyboard-focus a footprint to reveal its floor slider. A reported height changes only after the native operation returns a successful receipt; inspect the Rhino geometry as well.
+
+`index.html` contains the control manifest used by Slate; `control-manifest.json` is its readable companion. The dashboard requests native building state and changes only the floor count of a matching typed building. It does not run scripts inside Rhino or embed model-specific machine paths.
+
+This public folder is the canonical source example for future work. The five application assets were copied byte-for-byte from the historical sprint bundle; no portability fixes were needed. Historical recordings and private workbooks remain separate. This source preparation does not establish that the complete live-control workflow or requested case 9 has passed acceptance.

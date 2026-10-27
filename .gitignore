@@ -1,0 +1,11 @@
+bin/
+obj/
+*.log
+
+# Local projects contain models, recordings and machine-private agent state.
+project/
+portal-captures/
+slate-outputs/
+.slate-rhino-drafts/
+.atlas-ai/
+.codex/

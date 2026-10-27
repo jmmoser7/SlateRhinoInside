@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>10.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <AssemblyName>SlateRhinoInside</AssemblyName>
+    <RootNamespace>SlateRhinoInside</RootNamespace>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <Version>0.2.0</Version>
+    <RhinoSystemDirectory Condition="'$(RhinoSystemDirectory)' == ''">C:\Program Files\Rhino 8\System</RhinoSystemDirectory>
+  </PropertyGroup>
+  <ItemGroup><Compile Remove="Probe.cs" />
+    <PackageReference Include="Rhino.Inside" Version="8.0.7-beta" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="RhinoCommon"><HintPath>$(RhinoSystemDirectory)\RhinoCommon.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>
+

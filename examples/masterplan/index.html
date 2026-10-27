@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Harbor Quarter · Live masterplan</title>
+  <link rel="stylesheet" href="masterplan.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow"><span class="mark">H/Q</span> SLATE · DESIGN CONTROL</div>
+      <div class="heading"><div><h1>Harbor Quarter</h1><p>Six buildings. One connected model.</p></div><div class="connection" id="connection"><i></i><span>Waiting for Slate</span></div></div>
+    </header>
+    <section class="workspace" aria-label="Masterplan controls">
+      <div class="map-header"><span>01 / MASTERPLAN</span><span class="map-note">Hover a building to adjust its floor count</span><span class="north">N ↑</span></div>
+      <div class="plan" id="plan" aria-label="Building footprints; each building reveals a floor slider on hover or keyboard focus">
+        <svg class="site" viewBox="0 0 220 170" aria-hidden="true" preserveAspectRatio="none">
+          <defs><pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx=".4" cy=".4" r=".22" fill="#d7d8ce"/></pattern></defs>
+          <rect width="220" height="170" fill="url(#dots)"/>
+          <path d="M8 8H208V156H8Z" fill="#f0f1e9" stroke="#d6d9cb" stroke-width=".6"/>
+          <path d="M14 85H205M119 14V151" fill="none" stroke="#e2e4d9" stroke-width="15"/>
+          <path d="M14 85H205M119 14V151" fill="none" stroke="#fffefa" stroke-width=".7" stroke-dasharray="2 2"/>
+          <rect x="85" y="26" width="10" height="43" rx="4" fill="#d5ddc8"/>
+          <rect x="180" y="99" width="17" height="46" rx="7" fill="#d5ddc8"/>
+          <path d="M0 163H220V170H0Z" fill="#d7e4e4"/>
+          <path d="M0 164H220" stroke="#aac2c5" stroke-width=".5"/>
+          <text x="190" y="168" font-size="2.7" letter-spacing=".5" fill="#76979b">HARBOR EDGE</text>
+          <text x="15" y="81" font-size="2.6" letter-spacing=".5" fill="#929887">GARDEN WALK</text>
+        </svg>
+        <div id="buildings"></div>
+        <div class="scale"><span></span>20 m</div>
+      </div>
+      <div class="map-footer"><div class="legend"><span><i style="--legend:#c39576"></i>Housing</span><span><i style="--legend:#7d99a7"></i>Workplace</span><span><i style="--legend:#a4af8f"></i>Civic</span><span><i style="--legend:#beb07a"></i>Learning</span></div><span>Concept study · meters</span></div>
+    </section>
+    <section class="readout" aria-label="Model status" aria-live="polite">
+      <div><span class="small-label">MODEL STATE</span><strong id="state-title">Connect the model wire</strong><p id="state-detail">The controls activate when Slate confirms the linked model.</p></div>
+      <div class="metric"><span class="small-label">BUILDINGS</span><strong id="building-count">—</strong></div>
+      <div class="metric"><span class="small-label">GROSS FLOOR AREA</span><strong id="gfa">—</strong></div>
+      <div class="metric"><span class="small-label">TALLEST</span><strong id="tallest">—</strong></div>
+    </section>
+    <footer><span>Adjust here. Review the solid geometry in the connected 3D portal.</span><span id="receipt">No model changes submitted</span></footer>
+  </main>
+  <script type="application/slate-control+json">{"version":1,"controls":[{"id":"modelState","input":"model","command":"board.model.connector.invoke","arguments":{"command_id":"org.slate.rhino.buildings","parameters":{"offset":0,"limit":64}},"value":{"type":"trigger"}},{"id":"B01.floors","input":"model","command":"board.model.connector.invoke","arguments":{"command_id":"org.slate.rhino.draft_building_floors","parameters":{"building_id":"B01"}},"value":{"type":"integer","path":["parameters","floors"],"min":1,"max":80}},{"id":"B02.floors","input":"model","command":"board.model.connector.invoke","arguments":{"command_id":"org.slate.rhino.draft_building_floors","parameters":{"building_id":"B02"}},"value":{"type":"integer","path":["parameters","floors"],"min":1,"max":80}},{"id":"B03.floors","input":"model","command":"board.model.connector.invoke","arguments":{"command_id":"org.slate.rhino.draft_building_floors","parameters":{"building_id":"B03"}},"value":{"type":"integer","path":["parameters","floors"],"min":1,"max":80}},{"id":"B04.floors","input":"model","command":"board.model.connector.invoke","arguments":{"command_id":"org.slate.rhino.draft_building_floors","parameters":{"building_id":"B04"}},"value":{"type":"integer","path":["parameters","floors"],"min":1,"max":80}},{"id":"B05.floors","input":"model","command":"board.model.connector.invoke","arguments":{"command_id":"org.slate.rhino.draft_building_floors","parameters":{"building_id":"B05"}},"value":{"type":"integer","path":["parameters","floors"],"min":1,"max":80}},{"id":"B06.floors","input":"model","command":"board.model.connector.invoke","arguments":{"command_id":"org.slate.rhino.draft_building_floors","parameters":{"building_id":"B06"}},"value":{"type":"integer","path":["parameters","floors"],"min":1,"max":80}}]}</script>
+  <script src="masterplan-data.js"></script>
+  <script src="masterplan.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+{
+  "schema": "slate-rhino-helper-release-allowlist-v1",
+  "version": "0.2.0",
+  "candidate": "private-ui-v10e",
+  "status": "candidate_test_only_pending_root_release_gate",
+  "runtime": [
+    {
+      "source": "bin/Release/production-0.2.0-private-ui-v10e/SlateRhinoInside.exe",
+      "destination": "bin/Release/net48/SlateRhinoInside.exe",
+      "sha256": "1bc58650f53583c9e8bd084f92d157f12aa96b9ebbf131eb73d8ea63643084e0"
+    },
+    {
+      "source": "bin/Release/production-0.2.0-private-ui-v10e/SlateRhinoInside.exe.config",
+      "destination": "bin/Release/net48/SlateRhinoInside.exe.config",
+      "sha256": "051099983b896673909e01a1f631b6652abb88da95c9f06f3efef4be033091fa"
+    },
+    {
+      "source": "bin/Release/production-0.2.0-private-ui-v10e/Rhino.Inside.dll",
+      "destination": "bin/Release/net48/Rhino.Inside.dll",
+      "sha256": "a2ecf4f83d49865de9447e140f864217bf84e7310b55d370110f412252427f55"
+    },
+    {
+      "source": "bin/Release/production-0.2.0-private-ui-v10e/Newtonsoft.Json.dll",
+      "destination": "bin/Release/net48/Newtonsoft.Json.dll",
+      "sha256": "e1e27af7b07eeedf5ce71a9255f0422816a6fc5849a483c6714e1b472044fa9d"
+    }
+  ],
+  "source": [
+    "ConnectorSession.cs",
+    "Contract.cs",
+    "KeyboardRelay.cs",
+    "LayoutTests.cs",
+    "NativeCaptureReadiness.cs",
+    "NativeCommandPolicy.cs",
+    "NativeLoopLifetime.cs",
+    "NativeSurfaceAuthority.cs",
+    "NativeSurfaceAuthorityTests.cs",
+    "NativeUiScaleTests.cs",
+    "NativeWindowRecovery.cs",
+    "PeerSecurity.cs",
+    "Program.cs",
+    "QueuedRecoveryGate.cs",
+    "RecoveryGateTests.cs",
+    "RhinoAdapter.cs",
+    "RhinoBuildings.cs",
+    "RhinoDiagnostics.cs",
+    "RhinoGeometry.cs",
+    "RhinoGrasshopper.cs",
+    "RhinoInitialView.cs",
+    "RhinoLayers.cs",
+    "RhinoLayoutArtwork.cs",
+    "RhinoLayoutTemplate.cs",
+    "RhinoNamedViews.cs",
+    "RhinoPaths.cs",
+    "RhinoUiScale.cs",
+    "RhinoViews.cs",
+    "RuntimeTrace.cs",
+    "SelfTest.cs",
+    "Transport.cs",
+    "WorkflowContract.cs",
+    "WorkflowData.cs",
+    "WorkflowTests.cs",
+    "SlateRhinoInside.csproj",
+    "README.md",
+    "Register-SlateRhino.ps1",
+    ".gitignore",
+    "BUILD-LEDGER.md",
+    "research/rhino-inside-findings.md",
+    "THIRD-PARTY-NOTICES.md",
+    "licenses/Rhino.Inside-MIT.txt",
+    "licenses/Newtonsoft.Json-MIT.txt"
+  ],
+  "runtime_documents": [
+    "Register-SlateRhino.ps1",
+    "THIRD-PARTY-NOTICES.md",
+    "licenses/Rhino.Inside-MIT.txt",
+    "licenses/Newtonsoft.Json-MIT.txt"
+  ],
+  "generated_package_files": [
+    "README.md",
+    "PACKAGE-MANIFEST.json",
+    "SOURCE-MANIFEST.json",
+    "SHA256SUMS.txt"
+  ],
+  "exclusions": [
+    "RhinoCommon.dll",
+    "Rhino.exe",
+    "Grasshopper assemblies and plugins",
+    "*.pdb",
+    "Probe.cs and Probe.csproj",
+    "project/**",
+    "obj/**",
+    "models/workbooks/captures/film",
+    "machine registration/configuration/credentials",
+    "logs and agent state"
+  ],
+  "required_user_installation": "Windows x64, .NET Framework 4.8, independently installed licensed Rhino 8",
+  "runtime_acceptance": "Current pairing Grasshopper/camera verification remains pending; 271 pure tests do not certify GUI behavior",
+  "source_license": "No new license grant; owner final release gate pending"
+}

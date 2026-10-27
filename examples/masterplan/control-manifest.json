@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "controls": [
+    {
+      "id": "modelState",
+      "input": "model",
+      "command": "board.model.connector.invoke",
+      "arguments": {
+        "command_id": "org.slate.rhino.buildings",
+        "parameters": {
+          "offset": 0,
+          "limit": 64
+        }
+      },
+      "value": {
+        "type": "trigger"
+      }
+    },
+    {
+      "id": "B01.floors",
+      "input": "model",
+      "command": "board.model.connector.invoke",
+      "arguments": {
+        "command_id": "org.slate.rhino.draft_building_floors",
+        "parameters": {
+          "building_id": "B01"
+        }
+      },
+      "value": {
+        "type": "integer",
+        "path": [
+          "parameters",
+          "floors"
+        ],
+        "min": 1,
+        "max": 80
+      }
+    },
+    {
+      "id": "B02.floors",
+      "input": "model",
+      "command": "board.model.connector.invoke",
+      "arguments": {
+        "command_id": "org.slate.rhino.draft_building_floors",
+        "parameters": {
+          "building_id": "B02"
+        }
+      },
+      "value": {
+        "type": "integer",
+        "path": [
+          "parameters",
+          "floors"
+        ],
+        "min": 1,
+        "max": 80
+      }
+    },
+    {
+      "id": "B03.floors",
+      "input": "model",
+      "command": "board.model.connector.invoke",
+      "arguments": {
+        "command_id": "org.slate.rhino.draft_building_floors",
+        "parameters": {
+          "building_id": "B03"
+        }
+      },
+      "value": {
+        "type": "integer",
+        "path": [
+          "parameters",
+          "floors"
+        ],
+        "min": 1,
+        "max": 80
+      }
+    },
+    {
+      "id": "B04.floors",
+      "input": "model",
+      "command": "board.model.connector.invoke",
+      "arguments": {
+        "command_id": "org.slate.rhino.draft_building_floors",
+        "parameters": {
+          "building_id": "B04"
+        }
+      },
+      "value": {
+        "type": "integer",
+        "path": [
+          "parameters",
+          "floors"
+        ],
+        "min": 1,
+        "max": 80
+      }
+    },
+    {
+      "id": "B05.floors",
+      "input": "model",
+      "command": "board.model.connector.invoke",
+      "arguments": {
+        "command_id": "org.slate.rhino.draft_building_floors",
+        "parameters": {
+          "building_id": "B05"
+        }
+      },
+      "value": {
+        "type": "integer",
+        "path": [
+          "parameters",
+          "floors"
+        ],
+        "min": 1,
+        "max": 80
+      }
+    },
+    {
+      "id": "B06.floors",
+      "input": "model",
+      "command": "board.model.connector.invoke",
+      "arguments": {
+        "command_id": "org.slate.rhino.draft_building_floors",
+        "parameters": {
+          "building_id": "B06"
+        }
+      },
+      "value": {
+        "type": "integer",
+        "path": [
+          "parameters",
+          "floors"
+        ],
+        "min": 1,
+        "max": 80
+      }
+    }
+  ]
+}
